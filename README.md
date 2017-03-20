@@ -17,7 +17,7 @@ To fill the sheet row by row is a recommended feature to increase the speed on m
 
 ```php
 public function addRow(array $values) {
-    $this->writer->addNewRow($values);
+    $this->writer->addRow($values);
 }
 ```
 
@@ -55,3 +55,47 @@ public function getNewStyle() {
     return $style;
 }
 ```
+
+## Example for use
+
+This is a small example for using this wrapper.
+
+```php
+public function exportData($file_name, $file_path, array $header, array $values) {
+	$writer = new ExcelWriter();
+	$writer->setFileName($file_name);
+	$writer->setPath($file_path);
+
+	$header_style = $this->getHeaderStyle();
+	$writer->setColumnStyle($header_style, 'A');
+	$write->addRow($header);
+
+	$bold_style = $this->getBoldStyle();
+	$basic_style = $this->getBasicStyle();
+
+	$writer->setColumnStyle($bold_style, 'A');
+	$writer->setColumnStyle($basic_style, 'B');
+	foreach($values as $value) {
+		$write->addRow($value);
+	}
+
+	$writer->setColumnStyle($basic_style, 'A');
+	$writer->setColumnStyle($bold_style, 'B');
+	foreach($values as $value) {
+		$write->addRow($value);
+	}
+
+	$writer->saveFile();
+	$write->close();
+}
+```
+
+The xlsx sheet result might be look like this.
+
+R\C | A | B
+------------ | ------------- | ------------
+1 | **_Content for header_**
+2 | **Content in the first column** | Content in the second column
+3 | **Content in the first column** | Content in the second column
+4 | Content in the first column | **Content in the second column**
+5 | Content in the first column | **Content in the second column**
