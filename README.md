@@ -17,7 +17,7 @@ To fill the sheet row by row is a recommended feature to increase the speed on m
 
 ```php
 public function addRow(array $values) {
-	$this->writer->addNewRow($values);
+    $this->writer->addNewRow($values);
 }
 ```
 
@@ -25,7 +25,7 @@ For designing the sheet, it is possible to give any column at any time a new sty
 
 ```php
 public function setColumnStyle(Style $style, $column) {
-	$this->writer->getCurrentSheet()->setColumnStyle($column, $style);
+    $this->writer->getCurrentSheet()->setColumnStyle($column, $style);
 };
 ```
 
@@ -46,12 +46,12 @@ A column can be styled in a lot of ways. This wrapper includes the mostly used.
 
 ```php
 public function getNewStyle() {
-	$style = new Style();
-	$style	->setFontFamily('Aarial')
-			->setFontSize(12)
-			->setItalic(false)
-			->setBorder(Style::TOP);
+    $style = new Style();
+    $style ->setFontFamily('Aarial')
+           ->setFontSize(12)
+           ->setItalic(false)
+           ->setBorder(Style::TOP);
 
-	return $style;
+    return $style;
 }
-``
+```
