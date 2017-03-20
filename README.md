@@ -75,7 +75,7 @@ This is a small example for using this wrapper.
 
 ```php
 public function exportData($file_name, $file_path, array $header, array $values) {
-    $writer = new ExcelWriter();
+    $writer = new Writer();
     $writer->setFileName($file_name);
     $writer->setPath($file_path);
 
