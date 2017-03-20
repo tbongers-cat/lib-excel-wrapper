@@ -11,6 +11,7 @@ An excel-write has to implement a kind of functionality as defined.
 * Create a writer object
 * Define style for single column at any time
 * Fill the sheet row by row
+* Create new sheets and switch by name
 * Save to given folder and filename
 
 To fill the sheet row by row is a recommended feature to increase the speed on mass export of data. It will not be possible to step back to rows or single columns to change values or something else.
@@ -25,8 +26,20 @@ For designing the sheet, it is possible to give any column at any time a new sty
 
 ```php
 public function setColumnStyle(Style $style, $column) {
-    $this->writer->getCurrentSheet()->setColumnStyle($column, $style);
+    $this->writer->setColumnStyle($column, $style);
 };
+```
+
+It is possible to create new sheets and switch them by name. If you creating a new sheet, it will be automaticly the current.
+
+```php
+public function createSheet($name) {
+    $this->writer->createSheet($name);
+}
+
+Public function selectSheet($name) {
+    $this->writer->setCurrentSheet($name);
+}
 ```
 
 ## Define Styles
@@ -62,31 +75,50 @@ This is a small example for using this wrapper.
 
 ```php
 public function exportData($file_name, $file_path, array $header, array $values) {
-	$writer = new ExcelWriter();
-	$writer->setFileName($file_name);
-	$writer->setPath($file_path);
+    $writer = new ExcelWriter();
+    $writer->setFileName($file_name);
+    $writer->setPath($file_path);
 
-	$header_style = $this->getHeaderStyle();
-	$writer->setColumnStyle($header_style, 'A');
-	$write->addRow($header);
+    $header_style = $this->getHeaderStyle();
+    $writer->setColumnStyle($header_style, 'A');
+    $write->addRow($header);
 
-	$bold_style = $this->getBoldStyle();
-	$basic_style = $this->getBasicStyle();
+    $bold_style = $this->getBoldStyle();
+    $basic_style = $this->getBasicStyle();
 
-	$writer->setColumnStyle($bold_style, 'A');
-	$writer->setColumnStyle($basic_style, 'B');
-	foreach($values as $value) {
-		$write->addRow($value);
-	}
+    $writer->setColumnStyle($bold_style, 'A');
+    $writer->setColumnStyle($basic_style, 'B');
+    foreach($values as $value) {
+        $write->addRow($value);
+    }
 
-	$writer->setColumnStyle($basic_style, 'A');
-	$writer->setColumnStyle($bold_style, 'B');
-	foreach($values as $value) {
-		$write->addRow($value);
-	}
+    $writer->setColumnStyle($basic_style, 'A');
+    $writer->setColumnStyle($bold_style, 'B');
+    foreach($values as $value) {
+        $write->addRow($value);
+    }
 
-	$writer->saveFile();
-	$write->close();
+    $writer->saveFile();
+    $write->close();
+}
+
+protected function getHeaderStyle() {
+    $style = new Style()
+    $style->setBold(true)
+          ->setItalic(true);
+
+    return $style;
+}
+
+protected function getBoldStyle() {
+    $style = new Style()
+    $style->setBold(true)
+
+    return $style;
+}
+
+protected function getBsicStyle() {
+    return new Style();
 }
 ```
 
