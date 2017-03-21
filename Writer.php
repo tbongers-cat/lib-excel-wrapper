@@ -1,5 +1,7 @@
 <?php
 
+namespace CaT\Libs\ExcelWrapper;
+
 /**
  * Interface for a excel stream writer.
  * Defines recommended and expected functions.

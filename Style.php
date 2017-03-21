@@ -1,5 +1,7 @@
 <?php
 
+namespace CaT\Libs\ExcelWrapper;
+
 /**
  * Interface for styling a column.
  * This describes functions to style a column in a sheet.
