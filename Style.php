@@ -55,7 +55,7 @@ interface Style {
 	/**
 	 * Set the color of text
 	 *
-	 * @param string 	$color
+	 * @param string 	$color 	RGB Code
 	 *
 	 * @return null
 	 */
@@ -64,11 +64,29 @@ interface Style {
 	/**
 	 * Set the background-color
 	 *
-	 * @param string 	$background_color
+	 * @param string 	$background_color 	RGB code
 	 *
 	 * @return null
 	 */
 	public function setBackgroundColor($background_color);
+
+	/**
+	 * Set a horizontal line
+	 *
+	 * @param string 	$style
+	 *
+	 * @return null
+	 */
+	public function setHorizontalLine();
+
+	/**
+	 * Set vertical line on each column cell
+	 *
+	 * @param string 	$style
+	 *
+	 * @return null
+	 */
+	public function setVerticalLine();
 
 	/**
 	 * Set the text orientation
@@ -80,18 +98,9 @@ interface Style {
 	public function setOrientation($orientation);
 
 	/**
-	 * Set border of each cell in the column
-	 *
-	 * @param string 	$border
-	 *
-	 * @return null
-	 */
-	public function setBorder($border);
-
-	/**
 	 * Set border color
 	 *
-	 * @param string 	$border_color
+	 * @param string 	$border_color 	RGB code
 	 *
 	 * @return null
 	 */
