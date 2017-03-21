@@ -3,108 +3,359 @@
 namespace CaT\Libs\ExcelWrapper;
 
 /**
- * Interface for styling a column.
+ * Ummutable class for styling a column.
  * This describes functions to style a column in a sheet.
  *
  * @author Stefan Hecken 	<stefan.hecken@concepts-and-training.de>
  */
-interface Style {
+class Style {
+	const ORIENTATION_LEFT = "left";
+	const ORIENTATION_RIGHT = "right";
+	const ORIENTATION_CENTER = "center";
+	const ORIENTATION_BLOCK = "block";
+
+	/**
+	 * @var string
+	 */
+	protected $font_family;
+
+	/**
+	 * @var int
+	 */
+	protected $font_size;
+
+	/**
+	 * @var bool
+	 */
+	protected $bold;
+
+	/**
+	 * @var bool
+	 */
+	protected $italic;
+
+	/**
+	 * @var bool
+	 */
+	protected $underlined;
+
+	/**
+	 * @var string
+	 */
+	protected $text_color;
+
+	/**
+	 * @var string
+	 */
+	protected $background_color;
+
+	/**
+	 * @var bool
+	 */
+	protected $horizontal_line;
+
+	/**
+	 * @var bool
+	 */
+	protected $vertical_line;
+
+	/**
+	 * @var string
+	 */
+	protected $orientation;
+
+	/**
+	 * @var string
+	 */
+	protected $line_color;
+
+	public function __construct($font_family = "Arial",
+								$font_size = 10,
+								$bold = false,
+								$italic = false,
+								$underlined = false,
+								$text_color = "000000",
+								$background_color = "ffffff",
+								$horizontal_line = false,
+								$vertical_line = false,
+								$orientation = self::ORIENTATION_LEFT,
+								$line_color = "000000"
+	) {
+		assert('is_string($font_family)');
+		assert('is_string($font_size)');
+		assert('is_bool($bold)');
+		assert('is_bool($italic)');
+		assert('is_bool($underline)');
+		assert('is_string($text_color)');
+		assert('is_string($background_color)');
+		assert('is_bool($horizontal_line)');
+		assert('is_bool($vertical_line)');
+		assert('is_string($orientation) && in_array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK)');
+		assert('is_string($line_color)');
+
+		$this->font_family = $font_family;
+		$this->font_size = $font_size;
+		$this->bold = $bold;
+		$this->italic = $italic;
+		$this->underlined = $underlined;
+		$this->text_color = $text_color;
+		$this->background_color = $background_color;
+		$this->horizontal_line = $horizontal_line;
+		$this->vertical_line = $vertical_line;
+		$this->orientation = $orientation;
+		$this->line_color = $line_color;
+	}
+
+	/**
+	 * Get the font family
+	 *
+	 * @return string
+	 */
+	public function getFontFamily($font_family) {
+		$clone->font_family;
+	}
+
+	/**
+	 * Get the font size
+	 *
+	 * @return int
+	 */
+	public function getFontSize($font_size) {
+		$clone->font_size;
+	}
+
+	/**
+	 * Get the text bold
+	 *
+	 * @return bool
+	 */
+	public function getBold($bold) {
+		$clone->bold;
+	}
+
+	/**
+	 * Get the text italic
+	 *
+	 * @return bool
+	 */
+	public function getItalic($italic) {
+		$clone->italic;
+	}
+
+	/**
+	 * Set the text underlined
+	 *
+	 * @return bool
+	 */
+	public function getUnderline($underline) {
+		$clone->underline;
+	}
+
+	/**
+	 * Get the color of text
+	 *
+	 * @return string
+	 */
+	public function getTextColor($text_color) {
+		$clone->text_color;
+	}
+
+	/**
+	 * Get the color of background
+	 *
+	 * @return string
+	 */
+	public function getBackgroundColor($background_color) {
+		$clone->background_color;
+	}
+
+	/**
+	 * Get a horizontal line
+	 *
+	 * @return bool
+	 */
+	public function getHorizontalLine($horizontal_line) {
+		$clone->horizontal_line;
+	}
+
+	/**
+	 * Get vertical line on each column cell
+	 *
+	 * @return bool
+	 */
+	public function getVerticalLine() {
+		$clone->vertical_line;
+	}
+
+	/**
+	 * Get the text orientation
+	 *
+	 * @return string
+	 */
+	public function getOrientation() {
+		$clone->orientation;
+	}
+
+	/**
+	 * Get line color
+	 *
+	 * @return string
+	 */
+	public function getLineColor() {
+		$clone->line_color;
+	}
+
 	/**
 	 * Set the font family
 	 *
 	 * @param string 	$font_family
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setFontFamily($font_family);
+	public function withFontFamily($font_family) {
+		assert('is_string($font_family)');
+		$clone = clone $this;
+		$clone->font_family = $font_family;
+		return $clone;
+	}
 
 	/**
 	 * Set the font size
 	 *
 	 * @param int 		$font_size
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setFontSize($font_size);
-
-	/**
-	 * Set the text italic
-	 *
-	 * @param bool 		$italic
-	 *
-	 * @return null
-	 */
-	public function setItalic($italic);
+	public function withFontSize($font_size) {
+		assert('is_string($font_size)');
+		$clone = clone $this;
+		$clone->font_size = $font_size;
+		return $clone;
+	}
 
 	/**
 	 * Set the text bold
 	 *
 	 * @param bool 		$bold
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setBold($bold);
+	public function withBold($bold) {
+		assert('is_bool($bold)');
+		$clone = clone $this;
+		$clone->bold = $bold;
+		return $clone;
+	}
+
+	/**
+	 * Set the text italic
+	 *
+	 * @param bool 		$italic
+	 *
+	 * @return Style
+	 */
+	public function withItalic($italic) {
+		assert('is_bool($italic)');
+		$clone = clone $this;
+		$clone->italic = $italic;
+		return $clone;
+	}
 
 	/**
 	 * Set the text underlined
 	 *
 	 * @param bool 		$underline
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setUnderline($underline);
+	public function withUnderline($underline) {
+		assert('is_bool($underline)');
+		$clone = clone $this;
+		$clone->underline = $underline;
+		return $clone;
+	}
 
 	/**
 	 * Set the color of text
 	 *
-	 * @param string 	$color 	RGB Code
+	 * @param string 	$text_color 	RGB Code
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setColor($color);
+	public function withTextColor($text_color) {
+		assert('is_string($text_color)');
+		$clone = clone $this;
+		$clone->text_color = $text_color;
+		return $clone;
+	}
 
 	/**
-	 * Set the background-color
+	 * Set the color of background
 	 *
 	 * @param string 	$background_color 	RGB code
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setBackgroundColor($background_color);
+	public function withBackgroundColor($background_color) {
+		assert('is_string($background_color)');
+		$clone = clone $this;
+		$clone->background_color = $background_color;
+		return $clone;
+	}
 
 	/**
 	 * Set a horizontal line
 	 *
-	 * @param string 	$style
+	 * @param bool 		$horizontal_line
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setHorizontalLine();
+	public function withHorizontalLine($horizontal_line) {
+		assert('is_bool($horizontal_line)');
+		$clone = clone $this;
+		$clone->horizontal_line = $horizontal_line;
+		return $clone;
+	}
 
 	/**
 	 * Set vertical line on each column cell
 	 *
-	 * @param string 	$style
+	 * @param bool 		$horizontal_line
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setVerticalLine();
+	public function withVerticalLine($vertical_line) {
+		assert('is_bool($vertical_line)');
+		$clone = clone $this;
+		$clone->vertical_line = $vertical_line;
+		return $clone;
+	}
 
 	/**
 	 * Set the text orientation
 	 *
-	 * @param string 	$orientation
+	 * @param string 	$orientation (@see class contanst)
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setOrientation($orientation);
+	public function withOrientation($orientation) {
+		assert('is_string($orientation) && in_array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK)');
+		$clone = clone $this;
+		$clone->orientation = $orientation;
+		return $clone;
+	}
 
 	/**
-	 * Set border color
+	 * Set line color
 	 *
-	 * @param string 	$border_color 	RGB code
+	 * @param string 	$line_color 	RGB code
 	 *
-	 * @return null
+	 * @return Style
 	 */
-	public function setBorderColor($border_color);
+	public function withLineColor($line_color) {
+		assert('is_string($line_color)');
+		$clone = clone $this;
+		$clone->line_color = $line_color;
+		return $clone;
+	}
 }
