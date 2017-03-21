@@ -3,7 +3,7 @@
 namespace CaT\Libs\ExcelWrapper;
 
 /**
- * Ummutable class for styling a column.
+ * Immutable class for styling a column.
  * This describes functions to style a column in a sheet.
  *
  * @author Stefan Hecken 	<stefan.hecken@concepts-and-training.de>
