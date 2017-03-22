@@ -114,8 +114,8 @@ class Style {
 	 *
 	 * @return string
 	 */
-	public function getFontFamily($font_family) {
-		$clone->font_family;
+	public function getFontFamily() {
+		$this->font_family;
 	}
 
 	/**
@@ -123,8 +123,8 @@ class Style {
 	 *
 	 * @return int
 	 */
-	public function getFontSize($font_size) {
-		$clone->font_size;
+	public function getFontSize() {
+		$this->font_size;
 	}
 
 	/**
@@ -132,8 +132,8 @@ class Style {
 	 *
 	 * @return bool
 	 */
-	public function getBold($bold) {
-		$clone->bold;
+	public function getBold() {
+		$this->bold;
 	}
 
 	/**
@@ -141,8 +141,8 @@ class Style {
 	 *
 	 * @return bool
 	 */
-	public function getItalic($italic) {
-		$clone->italic;
+	public function getItalic() {
+		$this->italic;
 	}
 
 	/**
@@ -150,8 +150,8 @@ class Style {
 	 *
 	 * @return bool
 	 */
-	public function getUnderline($underline) {
-		$clone->underline;
+	public function getUnderline() {
+		$this->underline;
 	}
 
 	/**
@@ -159,8 +159,8 @@ class Style {
 	 *
 	 * @return string
 	 */
-	public function getTextColor($text_color) {
-		$clone->text_color;
+	public function getTextColor() {
+		$this->text_color;
 	}
 
 	/**
@@ -168,8 +168,8 @@ class Style {
 	 *
 	 * @return string
 	 */
-	public function getBackgroundColor($background_color) {
-		$clone->background_color;
+	public function getBackgroundColor() {
+		$this->background_color;
 	}
 
 	/**
@@ -177,8 +177,8 @@ class Style {
 	 *
 	 * @return bool
 	 */
-	public function getHorizontalLine($horizontal_line) {
-		$clone->horizontal_line;
+	public function getHorizontalLine() {
+		$this->horizontal_line;
 	}
 
 	/**
@@ -187,7 +187,7 @@ class Style {
 	 * @return bool
 	 */
 	public function getVerticalLine() {
-		$clone->vertical_line;
+		$this->vertical_line;
 	}
 
 	/**
@@ -196,7 +196,7 @@ class Style {
 	 * @return string
 	 */
 	public function getOrientation() {
-		$clone->orientation;
+		$this->orientation;
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Style {
 	 * @return string
 	 */
 	public function getLineColor() {
-		$clone->line_color;
+		$this->line_color;
 	}
 
 	/**
