@@ -1,7 +1,12 @@
 {
-"name":"conceptsandtraining/lib-excel-wrapper",
-"version":"v0.2",
-"license":[
-	"GPL-3.0"
-	]
+	"name":"conceptsandtraining/lib-excel-wrapper",
+	"version":"v0.2",
+	"license":[
+		"GPL-3.0"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"CaT\\Libs\\ExcelWrapper\\" : "."
+		}
+	}
 }
