@@ -57,19 +57,9 @@ class Style {
 	protected $horizontal_line;
 
 	/**
-	 * @var bool
-	 */
-	protected $vertical_line;
-
-	/**
 	 * @var string
 	 */
 	protected $orientation;
-
-	/**
-	 * @var string
-	 */
-	protected $line_color;
 
 	public function __construct($font_family = "Arial",
 								$font_size = 10,
@@ -79,9 +69,7 @@ class Style {
 								$text_color = "000000",
 								$background_color = "ffffff",
 								$horizontal_line = false,
-								$vertical_line = false,
-								$orientation = self::ORIENTATION_LEFT,
-								$line_color = "000000"
+								$orientation = self::ORIENTATION_LEFT
 	) {
 		assert('is_string($font_family)');
 		assert('is_string($font_size)');
@@ -91,10 +79,7 @@ class Style {
 		assert('is_string($text_color) && $this->validateColor($text_color)');
 		assert('is_string($background_color) && $this->validateColor($background_color)');
 		assert('is_bool($horizontal_line)');
-		assert('is_bool($vertical_line)');
-		assert('is_string($orientation) 
-				&& in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
-		assert('is_string($line_color) && $this->validateColor($line_color)');
+		//assert('is_string($orientation) && in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
 
 		$this->font_family = $font_family;
 		$this->font_size = $font_size;
@@ -104,9 +89,7 @@ class Style {
 		$this->text_color = $text_color;
 		$this->background_color = $background_color;
 		$this->horizontal_line = $horizontal_line;
-		$this->vertical_line = $vertical_line;
 		$this->orientation = $orientation;
-		$this->line_color = $line_color;
 	}
 
 	/**
@@ -115,7 +98,7 @@ class Style {
 	 * @return string
 	 */
 	public function getFontFamily() {
-		$this->font_family;
+		return $this->font_family;
 	}
 
 	/**
@@ -124,7 +107,7 @@ class Style {
 	 * @return int
 	 */
 	public function getFontSize() {
-		$this->font_size;
+		return $this->font_size;
 	}
 
 	/**
@@ -133,7 +116,7 @@ class Style {
 	 * @return bool
 	 */
 	public function getBold() {
-		$this->bold;
+		return $this->bold;
 	}
 
 	/**
@@ -142,7 +125,7 @@ class Style {
 	 * @return bool
 	 */
 	public function getItalic() {
-		$this->italic;
+		return $this->italic;
 	}
 
 	/**
@@ -151,7 +134,7 @@ class Style {
 	 * @return bool
 	 */
 	public function getUnderline() {
-		$this->underline;
+		return $this->underline;
 	}
 
 	/**
@@ -160,7 +143,7 @@ class Style {
 	 * @return string
 	 */
 	public function getTextColor() {
-		$this->text_color;
+		return $this->text_color;
 	}
 
 	/**
@@ -169,16 +152,7 @@ class Style {
 	 * @return string
 	 */
 	public function getBackgroundColor() {
-		$this->background_color;
-	}
-
-	/**
-	 * Get a horizontal line
-	 *
-	 * @return bool
-	 */
-	public function getHorizontalLine() {
-		$this->horizontal_line;
+		return $this->background_color;
 	}
 
 	/**
@@ -187,7 +161,7 @@ class Style {
 	 * @return bool
 	 */
 	public function getVerticalLine() {
-		$this->vertical_line;
+		return $this->vertical_line;
 	}
 
 	/**
@@ -196,16 +170,7 @@ class Style {
 	 * @return string
 	 */
 	public function getOrientation() {
-		$this->orientation;
-	}
-
-	/**
-	 * Get line color
-	 *
-	 * @return string
-	 */
-	public function getLineColor() {
-		$this->line_color;
+		return $this->orientation;
 	}
 
 	/**
@@ -307,20 +272,6 @@ class Style {
 	}
 
 	/**
-	 * Set a horizontal line
-	 *
-	 * @param bool 		$horizontal_line
-	 *
-	 * @return Style
-	 */
-	public function withHorizontalLine($horizontal_line) {
-		assert('is_bool($horizontal_line)');
-		$clone = clone $this;
-		$clone->horizontal_line = $horizontal_line;
-		return $clone;
-	}
-
-	/**
 	 * Set vertical line on the right side of each column cell
 	 *
 	 * @param bool 		$horizontal_line
@@ -342,24 +293,9 @@ class Style {
 	 * @return Style
 	 */
 	public function withOrientation($orientation) {
-		assert('is_string($orientation) 
-				&& in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
+		//assert('is_string($orientation) && in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
 		$clone = clone $this;
 		$clone->orientation = $orientation;
-		return $clone;
-	}
-
-	/**
-	 * Set line color
-	 *
-	 * @param string 	$line_color 	RGB code
-	 *
-	 * @return Style
-	 */
-	public function withLineColor($line_color) {
-		assert('is_string($line_color) && $this->validateColor($line_color)');
-		$clone = clone $this;
-		$clone->line_color = $line_color;
 		return $clone;
 	}
 
@@ -371,6 +307,6 @@ class Style {
 	 * @return bool
 	 */
 	protected function validateColor($color_code) {
-		return (bool)preg_match(self::COLOR_REG_EXP, $color_code)
+		return (bool)preg_match(self::COLOR_REG_EXP, $color_code);
 	}
 }
