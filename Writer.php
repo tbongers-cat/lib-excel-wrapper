@@ -49,11 +49,11 @@ interface Writer {
 	 * Set the style for a single column
 	 *
 	 * @param string 	$column
-	 * @param Style 	$style
+	 * @param object 	$style
 	 *
 	 * @return null
 	 */
-	public function setColumnStyle($column, Style $style);
+	public function setColumnStyle($column, $style);
 
 	/**
 	 * Add a new row to the current sheet.
