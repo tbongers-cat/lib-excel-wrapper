@@ -79,7 +79,7 @@ class Style {
 		assert('is_string($text_color) && $this->validateColor($text_color)');
 		assert('is_string($background_color) && $this->validateColor($background_color)');
 		assert('is_bool($horizontal_line)');
-		//assert('is_string($orientation) && in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
+		assert('is_string($orientation) && $this->validateOrientation($orientation)');
 
 		$this->font_family = $font_family;
 		$this->font_size = $font_size;
@@ -293,7 +293,7 @@ class Style {
 	 * @return Style
 	 */
 	public function withOrientation($orientation) {
-		//assert('is_string($orientation) && in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
+		assert('is_string($orientation) && $this->validateOrientation($orientation)');
 		$clone = clone $this;
 		$clone->orientation = $orientation;
 		return $clone;
@@ -308,5 +308,16 @@ class Style {
 	 */
 	protected function validateColor($color_code) {
 		return (bool)preg_match(self::COLOR_REG_EXP, $color_code);
+	}
+
+	/**
+	 * Check the orientation is valid
+	 *
+	 * @param string 	$orientation
+	 *
+	 * @return bool
+	 */
+	protected function validateOrientation($orientation) {
+		return in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT, self::ORIENTATION_CENTER, self::ORIENTATION_BLOCK));
 	}
 }
