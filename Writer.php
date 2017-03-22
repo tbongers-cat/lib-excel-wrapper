@@ -65,6 +65,13 @@ interface Writer {
 	public function addRow(array $values);
 
 	/**
+	 * Add a new empty row with border top
+	 *
+	 * @return null
+	 */
+	public function addSeperatorRow();
+
+	/**
 	 * Save the created file
 	 *
 	 * @return null
