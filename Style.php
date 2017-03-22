@@ -14,6 +14,8 @@ class Style {
 	const ORIENTATION_CENTER = "center";
 	const ORIENTATION_BLOCK = "block";
 
+	const COLOR_REG_EXP = "/^[A-Fa-f0-9]{6}$/i";
+
 	/**
 	 * @var string
 	 */
@@ -86,12 +88,13 @@ class Style {
 		assert('is_bool($bold)');
 		assert('is_bool($italic)');
 		assert('is_bool($underline)');
-		assert('is_string($text_color)');
-		assert('is_string($background_color)');
+		assert('is_string($text_color) && $this->validateColor($text_color)');
+		assert('is_string($background_color) && $this->validateColor($background_color)');
 		assert('is_bool($horizontal_line)');
 		assert('is_bool($vertical_line)');
-		assert('is_string($orientation) && in_array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK)');
-		assert('is_string($line_color)');
+		assert('is_string($orientation) 
+				&& in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
+		assert('is_string($line_color) && $this->validateColor($line_color)');
 
 		$this->font_family = $font_family;
 		$this->font_size = $font_size;
@@ -283,7 +286,7 @@ class Style {
 	 * @return Style
 	 */
 	public function withTextColor($text_color) {
-		assert('is_string($text_color)');
+		assert('is_string($text_color) && $this->validateColor($text_color)');
 		$clone = clone $this;
 		$clone->text_color = $text_color;
 		return $clone;
@@ -297,7 +300,7 @@ class Style {
 	 * @return Style
 	 */
 	public function withBackgroundColor($background_color) {
-		assert('is_string($background_color)');
+		assert('is_string($background_color) && $this->validateColor($background_color)');
 		$clone = clone $this;
 		$clone->background_color = $background_color;
 		return $clone;
@@ -318,7 +321,7 @@ class Style {
 	}
 
 	/**
-	 * Set vertical line on each column cell
+	 * Set vertical line on the right side of each column cell
 	 *
 	 * @param bool 		$horizontal_line
 	 *
@@ -339,7 +342,8 @@ class Style {
 	 * @return Style
 	 */
 	public function withOrientation($orientation) {
-		assert('is_string($orientation) && in_array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK)');
+		assert('is_string($orientation) 
+				&& in_array($orientation, array(self::ORIENTATION_LEFT, self::ORIENTATION_RIGHT self::ORIENTATION_CENTER self::ORIENTATION_BLOCK))');
 		$clone = clone $this;
 		$clone->orientation = $orientation;
 		return $clone;
@@ -353,9 +357,20 @@ class Style {
 	 * @return Style
 	 */
 	public function withLineColor($line_color) {
-		assert('is_string($line_color)');
+		assert('is_string($line_color) && $this->validateColor($line_color)');
 		$clone = clone $this;
 		$clone->line_color = $line_color;
 		return $clone;
+	}
+
+	/**
+	 * Check rgb color is valid
+	 *
+	 * @param string 	$color_code
+	 *
+	 * @return bool
+	 */
+	protected function validateColor($color_code) {
+		return (bool)preg_match(self::COLOR_REG_EXP, $color_code)
 	}
 }
