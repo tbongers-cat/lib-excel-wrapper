@@ -128,7 +128,7 @@ class StyleTest  extends PHPUnit_Framework_TestCase {
 
 	public function test_noValidOrientation() {
 		try {
-			$this->style = $this->style->withOrientation("links");
+			$this->style = $this->style->withOrientation("untenlinks");
 			$this->assertFalse("Should have raised.");
 		}
 		catch (Exception $e) {}
