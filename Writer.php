@@ -49,11 +49,11 @@ interface Writer {
 	 * Set the style for a single column
 	 *
 	 * @param string 	$column
-	 * @param Style 	$style
+	 * @param object 	$style
 	 *
 	 * @return null
 	 */
-	public function setColumnStyle($column, Style $style);
+	public function setColumnStyle($column, $style);
 
 	/**
 	 * Add a new row to the current sheet.
@@ -63,6 +63,13 @@ interface Writer {
 	 * @return null
 	 */
 	public function addRow(array $values);
+
+	/**
+	 * Add a new empty row with border top
+	 *
+	 * @return null
+	 */
+	public function addSeperatorRow();
 
 	/**
 	 * Save the created file
