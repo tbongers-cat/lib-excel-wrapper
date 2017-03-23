@@ -72,6 +72,13 @@ interface Writer {
 	public function addSeperatorRow();
 
 	/**
+	 * Add new empty row
+	 *
+	 * @return null
+	 */
+	public function addEmptyRow();
+
+	/**
 	 * Save the created file
 	 *
 	 * @return null
