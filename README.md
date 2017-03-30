@@ -80,20 +80,20 @@ public function exportData($file_name, $file_path, array $header, array $values)
     $writer->setPath($file_path);
 
     $header_style = $this->getHeaderStyle();
-    $writer->setColumnStyle($header_style, 'A');
+    $writer->setColumnStyle('A', $header_style);
     $write->addRow($header);
 
     $bold_style = $this->getBoldStyle();
     $basic_style = $this->getBasicStyle();
 
-    $writer->setColumnStyle($bold_style, 'A');
-    $writer->setColumnStyle($basic_style, 'B');
+    $writer->setColumnStyle('A', $bold_style);
+    $writer->setColumnStyle('B', $basic_style);
     foreach($values as $value) {
         $write->addRow($value);
     }
 
-    $writer->setColumnStyle($basic_style, 'A');
-    $writer->setColumnStyle($bold_style, 'B');
+    $writer->setColumnStyle('A', $basic_style);
+    $writer->setColumnStyle('B', $bold_style);
     foreach($values as $value) {
         $write->addRow($value);
     }

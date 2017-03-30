@@ -72,10 +72,10 @@ class Style {
 								$orientation = self::ORIENTATION_LEFT
 	) {
 		assert('is_string($font_family)');
-		assert('is_string($font_size)');
+		assert('is_int($font_size)');
 		assert('is_bool($bold)');
 		assert('is_bool($italic)');
-		assert('is_bool($underline)');
+		assert('is_bool($underlined)');
 		assert('is_string($text_color) && $this->validateColor($text_color)');
 		assert('is_string($background_color) && $this->validateColor($background_color)');
 		assert('is_bool($horizontal_line)');
@@ -195,7 +195,7 @@ class Style {
 	 * @return Style
 	 */
 	public function withFontSize($font_size) {
-		assert('is_string($font_size)');
+		assert('is_int($font_size)');
 		$clone = clone $this;
 		$clone->font_size = $font_size;
 		return $clone;
