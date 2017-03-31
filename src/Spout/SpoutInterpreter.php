@@ -9,8 +9,8 @@ use Box\Spout\Writer\Style\StyleBuilder;
 
 class SpoutInterpreter {
 	/**
- 	 * @var Style
- 	 */
+	 * @var Style
+	 */
 	protected $style;
 
 	/**

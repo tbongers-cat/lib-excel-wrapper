@@ -1,6 +1,6 @@
 <?php
 
-namespace CaT\Plugins\MaterialList\Lists\Export;
+namespace CaT\Libs\ExcelWrapper\Spout;
 
 use \CaT\Plugins\MateriaList\ilActions;
 use \CaT\Libs\ExcelWrapper\Writer;
@@ -54,7 +54,7 @@ class SpoutWriter implements Writer {
 	 */
 	public function getEmptyValueArray($with_spaces = false) {
 		$ret = array();
-		for ($i=0; $i < $this->max_column_count; $i++) { 
+		for ($i=0; $i < $this->max_column_count; $i++) {
 			if($with_spaces) {
 				$ret[] = " ";
 			} else {
