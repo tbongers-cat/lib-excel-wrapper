@@ -9,6 +9,9 @@
 			"CaT\\Libs\\ExcelWrapper\\" : "./src"
 		}
 	},
+	"require": {
+		"box/spout": "^2.4"
+	},
 	"extra": {
 		"box/spout" : {
 			"source" : "https://github.com/box/spout",
