@@ -71,14 +71,14 @@ class SpoutCSVWriter implements Writer {
 	 * @inheritdoc
 	 */
 	public function addRow(array $values) {
-		$this->writer->addRowToWriter($values);
+		$this->writer->addRow($values);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function addSeperatorRow() {
-		$this->writer->addRowToWriter(array(""));
+		$this->writer->addRow(array(""));
 	}
 
 	/**
@@ -87,7 +87,7 @@ class SpoutCSVWriter implements Writer {
 	 * @return null
 	 */
 	public function addEmptyRow() {
-		$this->writer->addRowToWriter(array(""));
+		$this->writer->addRow(array(""));
 	}
 
 	/**
