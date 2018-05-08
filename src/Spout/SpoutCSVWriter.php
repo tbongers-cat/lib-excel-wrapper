@@ -53,14 +53,12 @@ class SpoutCSVWriter implements Writer {
 	 * @inheritdoc
 	 */
 	public function createSheet($sheet_name) {
-		return;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function selectSheet($sheet_name) {
-		return;
 	}
 
 	/**
@@ -96,7 +94,6 @@ class SpoutCSVWriter implements Writer {
 	 * @inheritdoc
 	 */
 	public function saveFile() {
-		return;
 	}
 
 	/**
