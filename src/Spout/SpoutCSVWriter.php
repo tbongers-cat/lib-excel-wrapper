@@ -122,8 +122,7 @@ class SpoutCSVWriter implements Writer {
 	* @param string $fieldDelimiter Character that delimits fields
 	* @return Writer
 	*/
-	public function setFieldDelimiter($fieldDelimiter)
-	{
+	public function setFieldDelimiter($fieldDelimiter) {
 		$this->writer->setFieldDelimiter($fieldDelimiter);
 	}
 
@@ -134,8 +133,7 @@ class SpoutCSVWriter implements Writer {
 	* @param string $fieldEnclosure Character that enclose fields
 	* @return Writer
 	*/
-	public function setFieldEnclosure($fieldEnclosure)
-	{
+	public function setFieldEnclosure($fieldEnclosure) {
 		$this->writer->setFieldEnclosure($fieldEnclosure);
 	}
 }
