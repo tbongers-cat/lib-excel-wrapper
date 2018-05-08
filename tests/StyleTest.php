@@ -1,9 +1,10 @@
 <?php
 
-require_once(__DIR__."/../Style.php");
+require_once(__DIR__."/../src/Style.php");
 use \CaT\Libs\ExcelWrapper\Style;
+use PHPUnit\Framework\TestCase;
 
-class StyleTest  extends PHPUnit_Framework_TestCase {
+class StyleTest  extends TestCase {
 	public function setUp() {
 		$this->style = new Style();
 	}
