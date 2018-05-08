@@ -80,7 +80,7 @@ class SpoutCSVWriter implements Writer {
 	 * @inheritdoc
 	 */
 	public function addSeperatorRow() {
-		$this->writer->addRowToWriter($this->getEmptyValueArray(true));
+		$this->writer->addRowToWriter(array(""));
 	}
 
 	/**
