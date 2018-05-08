@@ -12,6 +12,13 @@
 	"require": {
 		"box/spout": "^2.4"
 	},
+	"config" : {
+		"autoloader-suffix" : "ExcelWrapper"
+	},
+	"require-dev": {
+		"roave/security-advisories": "dev-master",
+		"sensiolabs/security-checker": "^4.1"
+	},
 	"extra": {
 		"box/spout" : {
 			"source" : "https://github.com/box/spout",
