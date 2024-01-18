@@ -11,84 +11,53 @@ namespace CaT\Libs\ExcelWrapper;
 interface Writer {
 	/**
 	 * Set name of the created xlsx file
-	 *
-	 * @param string 	$file_name
-	 *
-	 * @return null
 	 */
-	public function setFileName($file_name);
+	public function setFileName(string $file_name): void;
 
 	/**
 	 * Set path to save the file
-	 *
-	 * @param string 	$file_path
-	 *
-	 * @return null
 	 */
-	public function setPath($file_path);
+	public function setPath(string $file_path): void;
 
 	/**
 	 * Creates a new sheet in the workbook
-	 *
-	 * @param string 	$sheet_name
-	 *
-	 * @return null
 	 */
-	public function createSheet($sheet_name);
+	public function createSheet(string $sheet_name): void;
 
 	/**
 	 * Switch the current sheet of workbook
-	 *
-	 * @param string 	$sheet_name
-	 *
-	 * @return null
 	 */
-	public function selectSheet($sheet_name);
+	public function selectSheet(string $sheet_name): void;
 
 	/**
 	 * Set the style for a single column
-	 *
-	 * @param string 	$column
-	 * @param object 	$style
-	 *
-	 * @return null
 	 */
-	public function setColumnStyle($column, $style);
+	public function setColumnStyle(string $column, \Box\Spout\Common\Entity\Style\Style $style): void;
 
 	/**
 	 * Add a new row to the current sheet.
 	 *
 	 * @param mixed[]	$values
-	 *
-	 * @return null
 	 */
-	public function addRow(array $values);
+	public function addRow(array $values): void;
 
 	/**
 	 * Add a new empty row with border top
-	 *
-	 * @return null
 	 */
-	public function addSeperatorRow();
+	public function addSeperatorRow(): void;
 
 	/**
 	 * Add new empty row
-	 *
-	 * @return null
 	 */
-	public function addEmptyRow();
+	public function addEmptyRow(): void;
 
 	/**
 	 * Save the created file
-	 *
-	 * @return null
 	 */
-	public function saveFile();
+	public function saveFile(): void;
 
 	/**
 	 * Close the stream writer
-	 *
-	 * @return null
 	 */
-	public function close();
+	public function close(): void;
 }
