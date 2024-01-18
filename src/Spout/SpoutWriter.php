@@ -5,29 +5,35 @@ namespace CaT\Libs\ExcelWrapper\Spout;
 use \CaT\Plugins\MateriaList\ilActions;
 use \CaT\Libs\ExcelWrapper\Writer;
 
-use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
-
-use Box\Spout\Writer\Style\Style;
-use Box\Spout\Writer\Style\BorderBuilder;
-use Box\Spout\Writer\Style\StyleBuilder;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Entity\Cell;
+use Box\Spout\Writer\WriterInterface;
+use Box\Spout\Common\Entity\Style\Style;
+use Box\Spout\Common\Entity\Style\Border;
+use Box\Spout\Common\Entity\Style\BorderPart;
 
 /**
  * Export a single material list
  */
 class SpoutWriter implements Writer {
+    protected WriterInterface $writer;
+    protected ?string $file_name = null;
+    protected ?string $file_path = null;
+    protected int $max_column_count;
+    protected Style $style;
+
 	public function __construct() {
-		$this->writer = WriterFactory::create(Type::XLSX);
+        $this->writer = WriterEntityFactory::createXLSXWriter();
 	}
 
 	/**
 	 * Open file for spout
 	 *
 	 * @throws \LogicException if path or file name is not set.
-	 *
-	 * @return null
 	 */
-	public function openFile() {
+	public function openFile(): void
+    {
 		if($this->file_path === null || $this->file_name === null) {
 			throw new \LogicException(__METHOD__." path or filename is not set.");
 		}
@@ -37,51 +43,52 @@ class SpoutWriter implements Writer {
 
 	/**
 	 * Set the number of columns the sheet will be filled in
-	 *
-	 * @param int 	$max_column_count
 	 */
-	public function setMaximumColumnCount($max_column_count) {
-		assert('is_int($max_column_count)');
+	public function setMaximumColumnCount(int $max_column_count): void
+    {
 		$this->max_column_count = $max_column_count;
 	}
 
 	/**
 	 * Get a values array according to max column count
 	 *
-	 * @param bool 		$with_spaces
-	 *
-	 * @return string[]
+	 * @return Cell[]
 	 */
-	public function getEmptyValueArray($with_spaces = false) {
-		$ret = array();
+	protected function getEmptyValueArray(bool $with_spaces = false): array
+    {
+		$ret = [];
 		for ($i=0; $i < $this->max_column_count; $i++) {
 			if($with_spaces) {
-				$ret[] = " ";
+				$ret[] = new Cell(' ');
 			} else {
-				$ret[] = "";
+				$ret[] = new Cell('');
 			}
 		}
 
 		return $ret;
 	}
+
 	/**
 	 * @inheritdoc
 	 */
-	public function setFileName($file_name) {
+	public function setFileName(string $file_name): void
+    {
 		$this->file_name = $file_name;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function setPath($file_path) {
+	public function setPath(string $file_path): void
+    {
 		$this->file_path = $file_path;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function createSheet($sheet_name) {
+	public function createSheet(string $sheet_name): void
+    {
 		$new_sheet = $this->writer->addNewSheetAndMakeItCurrent();
 		$new_sheet->setName($sheet_name);
 	}
@@ -89,70 +96,74 @@ class SpoutWriter implements Writer {
 	/**
 	 * @inheritdoc
 	 */
-	public function selectSheet($sheet_name) {
-		return;
+	public function selectSheet(string $sheet_name): void
+    {
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function setColumnStyle($column, $style) {
-		//assert('$style instanceof Style::class');
+	public function setColumnStyle(string $column, Style $style): void
+    {
 		$this->style = $style;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function addRow(array $values) {
-		$this->writer->addRowWithStyle($values, $this->style);
+	public function addRow(array $values): void
+    {
+        $cells = [];
+        foreach ($values as $value) {
+            $cells[] = new Cell($value);
+        }
+        $row = new Row($cells, $this->style);
+		$this->writer->addRow($row);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function addSeperatorRow() {
-		$spout_border = (new BorderBuilder())
-						->setBorderTop();
-		$border = $spout_border->build();
+	public function addSeperatorRow(): void
+    {
+        $border_top = new BorderPart('top');
+        $border = new Border([$border_top]);
+        $style = new Style();
+        $style->setBorder($border);
 
-		$spout_style = (new StyleBuilder())
-						->setBorder($border);
-
-		$style = $spout_style->build();
-
-		$this->writer->addRowWithStyle($this->getEmptyValueArray(true), $style);
-	}
-
-	/**
-	 * Add new empty row
-	 *
-	 * @return null
-	 */
-	public function addEmptyRow() {
-		$this->writer->addRow(array(""));
+        $row = new Row($this->getEmptyValueArray(true), $style);
+		$this->writer->addRow($row);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function saveFile() {
-		return;
+	public function addEmptyRow(): void
+    {
+        $row = new Row([], null);
+		$this->writer->addRow($row);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function close() {
+	public function saveFile(): void
+    {
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function close(): void
+    {
 		$this->writer->close();
 	}
 
 	/**
-	 * Get the full path to file
-	 *
-	 * @return string
+	 * @inheritdoc
 	 */
-	protected function getFilePath() {
-		return $this->file_path.$this->file_name;
+	protected function getFilePath(): string
+    {
+		return ($this->file_path ?? '').($this->file_name ?? '');
 	}
 }
