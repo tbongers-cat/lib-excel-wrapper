@@ -9,17 +9,17 @@ use Box\Spout\Common\Entity\Style\BorderPart;
 
 class SpoutInterpreter
 {
-	/**
-	 * Interpret a style object
-	 */
-	public function interpret(CatStyle $style): SpoutStyle
+    /**
+     * Interpret a style object
+     */
+    public function interpret(CatStyle $style): SpoutStyle
     {
         $spout_style = (new SpoutStyle())
-        ->setFontName($style->getFontFamily())
-        ->setFontSize($style->getFontSize())
-        ->setFontColor($style->getTextColor())
-        ->setBackgroundColor($style->getBackgroundColor())
-        ->setCellAlignment($style->getOrientation());
+            ->setFontName($style->getFontFamily())
+            ->setFontSize($style->getFontSize())
+            ->setFontColor($style->getTextColor())
+            ->setBackgroundColor($style->getBackgroundColor())
+            ->setCellAlignment($style->getOrientation());
 
         if ($style->getBold()) {
             $spout_style = $spout_style->setFontBold();
@@ -40,5 +40,5 @@ class SpoutInterpreter
         }
 
         return $spout_style;
-	}
+    }
 }
