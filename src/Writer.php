@@ -36,8 +36,6 @@ interface Writer {
 
 	/**
 	 * Add a new row to the current sheet.
-	 *
-	 * @param mixed[]	$values
 	 */
 	public function addRow(array $values): void;
 
