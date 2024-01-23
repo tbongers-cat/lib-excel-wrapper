@@ -19,130 +19,131 @@ class SpoutCSVWriter implements Writer
     protected ?string $file_name = null;
     protected ?string $file_path = null;
 
-	public function __construct() {
-		$this->writer = WriterEntityFactory::createCSVWriter();
-	}
-
-	/**
-	 * Open file for spout
-	 *
-	 * @throws \LogicException if path or file name is not set.
-	 *
-	 * @return null
-	 */
-	public function openFile(): void
+    public function __construct()
     {
-		if($this->file_path === null || $this->file_name === null) {
-			throw new \LogicException(__METHOD__." path or filename is not set.");
-		}
+        $this->writer = WriterEntityFactory::createCSVWriter();
+    }
 
-		$this->writer->openToFile($this->getFilePath());
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function setFileName(string $file_name): void
+    /**
+     * Open file for spout
+     *
+     * @return null
+     * @throws \LogicException if path or file name is not set.
+     *
+     */
+    public function openFile(): void
     {
-		$this->file_name = $file_name;
-	}
+        if ($this->file_path === null || $this->file_name === null) {
+            throw new \LogicException(__METHOD__ . " path or filename is not set.");
+        }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function setPath(string $file_path): void
+        $this->writer->openToFile($this->getFilePath());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFileName(string $file_name): void
     {
-		$this->file_path = $file_path;
-	}
+        $this->file_name = $file_name;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function createSheet(string $sheet_name): void
+    /**
+     * @inheritdoc
+     */
+    public function setPath(string $file_path): void
     {
-	}
+        $this->file_path = $file_path;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function selectSheet(string $sheet_name): void
+    /**
+     * @inheritdoc
+     */
+    public function createSheet(string $sheet_name): void
     {
-	}
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function setColumnStyle(string $column, Style $style): void
+    /**
+     * @inheritdoc
+     */
+    public function selectSheet(string $sheet_name): void
     {
-	}
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function addRow(array $values): void
+    /**
+     * @inheritdoc
+     */
+    public function setColumnStyle(string $column, Style $style): void
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addRow(array $values): void
     {
         $row = new Row($values, null);
-		$this->writer->addRow($row);
-	}
+        $this->writer->addRow($row);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function addSeperatorRow(): void
+    /**
+     * @inheritdoc
+     */
+    public function addSeperatorRow(): void
     {
         $row = new Row([], null);
-		$this->writer->addRow($row);
-	}
+        $this->writer->addRow($row);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function addEmptyRow(): void
+    /**
+     * @inheritdoc
+     */
+    public function addEmptyRow(): void
     {
         $row = new Row([], null);
-		$this->writer->addRow($row);
-	}
+        $this->writer->addRow($row);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function saveFile(): void
+    /**
+     * @inheritdoc
+     */
+    public function saveFile(): void
     {
-	}
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function close(): void
+    /**
+     * @inheritdoc
+     */
+    public function close(): void
     {
-		$this->writer->close();
-	}
+        $this->writer->close();
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	protected function getFilePath(): string
+    /**
+     * @inheritdoc
+     */
+    protected function getFilePath(): string
     {
-		return ($this->file_path ?? '').($this->file_name ?? '');
-	}
+        return ($this->file_path ?? '') . ($this->file_name ?? '');
+    }
 
-	/**
-	* Sets the field delimiter for the CSV
-	*
-	* @api
-	*/
-	public function setFieldDelimiter(string $fieldDelimiter): void
+    /**
+     * Sets the field delimiter for the CSV
+     *
+     * @api
+     */
+    public function setFieldDelimiter(string $fieldDelimiter): void
     {
-		$this->writer->setFieldDelimiter($fieldDelimiter);
-	}
+        $this->writer->setFieldDelimiter($fieldDelimiter);
+    }
 
-	/**
-	* Sets the field enclosure for the CSV
-	*
-	* @api
-	*/
-	public function setFieldEnclosure(string $fieldEnclosure): void
+    /**
+     * Sets the field enclosure for the CSV
+     *
+     * @api
+     */
+    public function setFieldEnclosure(string $fieldEnclosure): void
     {
-		$this->writer->setFieldEnclosure($fieldEnclosure);
-	}
+        $this->writer->setFieldEnclosure($fieldEnclosure);
+    }
 }
